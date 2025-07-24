@@ -9,7 +9,14 @@ public class PersonRepositoryTests : BaseRepository
 {
     private static Data.Person CreatePerson(int id = 1)
     {
-        return new Data.Person { Id = id, FirstName = "John", LastName = "Cooper" };
+        return new Data.Person { 
+            Id = id, 
+            FirstName = "John", 
+            LastName = "Cooper", 
+            EmailAddress = "test@test.com",
+            DateOfBirth = DateOnly.FromDateTime(DateTime.Now),
+            DepartmentId = 1
+        };
     }
 
     [Fact]
@@ -29,6 +36,9 @@ public class PersonRepositoryTests : BaseRepository
         Assert.NotNull(result);
         Assert.Equal("John", result.FirstName);
         Assert.Equal("Cooper", result.LastName);
+        Assert.Equal(DateOnly.FromDateTime(DateTime.Now), result.DateOfBirth);
+        Assert.Equal(1, result.DepartmentId);
+        Assert.Equal("test@test.com", result.EmailAddress);
     }
 
     [Fact]
@@ -62,12 +72,23 @@ public class PersonRepositoryTests : BaseRepository
         context.SaveChanges();
             
         var repo = new PersonRepository(context);
-        var updatePerson = new Data.Person { Id = 1, FirstName = "Jeff", LastName = "Cooper" };
+        var updatePerson = new Data.Person
+        {
+            Id = 1, 
+            FirstName = "Jeff", 
+            LastName = "Moore", 
+            EmailAddress = "jeff.moore@gmail.com",
+            DateOfBirth = DateOnly.FromDateTime(DateTime.Now.AddDays(1)),
+            DepartmentId = 2
+        };
         repo.Update(updatePerson);
             
         var updatedPerson = context.People.Find(1);
         Assert.Equal("Jeff", updatedPerson.FirstName);
-        Assert.Equal("Cooper", updatedPerson.LastName);
+        Assert.Equal("Moore", updatedPerson.LastName);
+        Assert.Equal("jeff.moore@gmail.com", updatedPerson.EmailAddress);
+        Assert.Equal(DateOnly.FromDateTime(DateTime.Now.AddDays(1)), updatedPerson.DateOfBirth);
+        Assert.Equal(2, updatedPerson.DepartmentId);
         
     }
     
@@ -82,13 +103,22 @@ public class PersonRepositoryTests : BaseRepository
         context.SaveChanges();
             
         var repo = new PersonRepository(context);
-        var addPerson = new Data.Person { Id = 0, FirstName = "Katie", LastName = "Jackson" };
+        var addPerson = new Data.Person
+        {
+            Id = 0, FirstName = "Katie", 
+            LastName = "Jackson", 
+            EmailAddress = "katie@gmail.com",
+            DateOfBirth = DateOnly.FromDateTime(DateTime.Now),
+            DepartmentId = 3
+        };
         repo.Add(addPerson);
             
         var addedPerson = context.People.Find(2);
         Assert.Equal(2, addedPerson.Id);
         Assert.Equal("Katie", addedPerson.FirstName);
         Assert.Equal("Jackson", addedPerson.LastName);
-        
+        Assert.Equal("katie@gmail.com", addedPerson.EmailAddress);
+        Assert.Equal(DateOnly.FromDateTime(DateTime.Now), addedPerson.DateOfBirth);
+        Assert.Equal(3, addedPerson.DepartmentId);
     }
 }
