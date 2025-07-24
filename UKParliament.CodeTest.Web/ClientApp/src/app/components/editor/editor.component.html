@@ -26,6 +26,15 @@
     </small>
   </div>
 
+  <label>Email:
+    <input type="text" formControlName="email"/>
+  </label>
+  <div *ngIf="personForm.get('email')?.invalid && personForm.get('email')?.touched">
+    <small *ngIf="personForm.get('email')?.errors?.['required']">Email is required.</small>
+    <small *ngIf="personForm.get('email')?.errors?.['email']">
+      Email address invalid.
+    </small>
+  </div>
 
   <label for="department">Department:</label>
   <select id="department" formControlName="department">

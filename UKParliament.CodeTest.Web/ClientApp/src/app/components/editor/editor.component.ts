@@ -41,7 +41,11 @@ export class EditorComponent implements OnChanges, OnInit {
       department: ['', Validators.required],
       dateOfBirth: ['', [
         Validators.required,
-        dateValidator] // matches YYYY-MM-DD
+        dateValidator]
+      ],
+      email: ['', [
+        Validators.required,
+        Validators.email]
       ],
     });
   }
@@ -69,6 +73,7 @@ export class EditorComponent implements OnChanges, OnInit {
     this.personForm.controls['lastname'].setValue(person.lastName);
     this.personForm.controls['department'].setValue(person.departmentId)
     this.personForm.controls['dateOfBirth'].setValue(person.dateOfBirth);
+    this.personForm.controls['email'].setValue(person.emailAddress);
 
     this.selectedPersonId = person.id;
   }
@@ -83,6 +88,7 @@ export class EditorComponent implements OnChanges, OnInit {
         lastName: this.personForm.controls['lastname'].value,
         departmentId: this.personForm.controls['department'].value,
         dateOfBirth: this.personForm.controls['dateOfBirth'].value,
+        emailAddress: this.personForm.controls['email'].value
       }
 
       this.personService.update(payload).subscribe({
@@ -97,6 +103,7 @@ export class EditorComponent implements OnChanges, OnInit {
         lastName: this.personForm.controls['lastname'].value,
         departmentId: this.personForm.controls['department'].value,
         dateOfBirth: this.personForm.controls['dateOfBirth'].value,
+        emailAddress: this.personForm.controls['email'].value
       }
 
       this.personService.add(payload).subscribe({

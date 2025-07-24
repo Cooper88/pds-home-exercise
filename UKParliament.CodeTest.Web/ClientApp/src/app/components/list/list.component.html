@@ -1,7 +1,10 @@
 <div>
 
   <p *ngFor="let person of people">
-    {{ person.firstName }} {{ person.lastName }}
+    {{ person.firstName }}
+    {{ person.lastName }}
+    {{ person.emailAddress }}
+    {{ person.dateOfBirth }}
     <button (click)="editPerson(person.id)">Edit</button>
   </p>
 

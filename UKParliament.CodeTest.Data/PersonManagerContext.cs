@@ -23,12 +23,12 @@ public class PersonManagerContext : DbContext
             new Person
             {
                 Id = 1, FirstName = "Jeff", LastName = "Cooper", DateOfBirth = new DateOnly(1990, 1, 1),
-                DepartmentId = 1
+                DepartmentId = 1, EmailAddress = "jeff@gmail.com"
             },
             new Person
             {
                 Id = 2, FirstName = "Dave", LastName = "Smith", DateOfBirth = new DateOnly(1980, 1, 1),
-                DepartmentId = 2
+                DepartmentId = 2, EmailAddress = "dave@gmail.com"
             });
     }
 

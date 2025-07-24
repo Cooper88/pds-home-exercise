@@ -11,4 +11,6 @@ public class Person
     public DateOnly DateOfBirth { get; set; }
     
     public int DepartmentId { get; set; }
+    
+    public string EmailAddress { get; set; }
 }
