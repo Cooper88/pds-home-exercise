@@ -72,4 +72,19 @@ public class PersonServiceTests
         // Assert
         _personRepository.Received(1).Update(Arg.Any<Person>());
     }
+    
+    [Fact]
+    public void PersonService_Add()
+    {
+        // Arrange
+        var person = new Person { Id = 0, FirstName = "Jeff", LastName = "Cooper" };
+
+        _personRepository.Add(Arg.Any<Person>());
+
+        // Act
+        _personService.Add(person);
+
+        // Assert
+        _personRepository.Received(1).Add(Arg.Any<Person>());
+    }
 }

@@ -71,4 +71,24 @@ public class PersonRepositoryTests : BaseRepository
         
     }
     
+    [Fact]
+    public void PersonRepository_Add_Person()
+    {
+        var options = CreateNewContextOptions();
+
+        using var context = new PersonManagerContext(options);
+        var person = CreatePerson();
+        context.People.Add(person);
+        context.SaveChanges();
+            
+        var repo = new PersonRepository(context);
+        var addPerson = new Data.Person { Id = 0, FirstName = "Katie", LastName = "Jackson" };
+        repo.Add(addPerson);
+            
+        var addedPerson = context.People.Find(2);
+        Assert.Equal(2, addedPerson.Id);
+        Assert.Equal("Katie", addedPerson.FirstName);
+        Assert.Equal("Jackson", addedPerson.LastName);
+        
+    }
 }

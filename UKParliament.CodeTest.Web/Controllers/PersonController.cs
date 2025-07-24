@@ -40,10 +40,18 @@ public class PersonController : ControllerBase
     }
     
     [Route("update")]
-    [HttpPost]
+    [HttpPut]
     public ActionResult Update([FromBody] Person person)
     {
         _personService.Update(person);
+        return Ok();
+    }
+    
+    [Route("add")]
+    [HttpPost]
+    public ActionResult Add([FromBody] Person person)
+    {
+        _personService.Add(person);
         return Ok();
     }
 }

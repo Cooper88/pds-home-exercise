@@ -8,4 +8,5 @@ public interface IPersonRepository
     IEnumerable<Person> GetAll();
 
     void Update(Person person);
+    void Add(Person person);
 }

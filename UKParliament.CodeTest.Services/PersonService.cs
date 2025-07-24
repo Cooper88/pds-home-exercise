@@ -27,4 +27,8 @@ public class PersonService : IPersonService
         _personRepository.Update(person);
     }
     
+    public void Add(Person person)
+    {
+        _personRepository.Add(person);
+    }
 }
