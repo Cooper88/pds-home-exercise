@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UKParliament.CodeTest.Data;
 using UKParliament.CodeTest.Services;
+using UKParliament.CodeTest.Web.Mapping;
 using UKParliament.CodeTest.Web.ViewModels;
 
 namespace UKParliament.CodeTest.Web.Controllers;
@@ -9,8 +9,7 @@ namespace UKParliament.CodeTest.Web.Controllers;
 [Route("api/[controller]")]
 public class PersonController : ControllerBase
 {
-
-    IPersonService _personService;
+    private readonly IPersonService _personService;
     
     public PersonController(IPersonService personService)
     {
@@ -23,34 +22,37 @@ public class PersonController : ControllerBase
     {
  
         var person = _personService.Get(id);
+
+        if (person == null) return NotFound();
         
-        // PersonViewModel  personViewModel = new PersonViewModel();
-        
-        // Convert to view model
-        // show department 
-        
-        return  person == null ? NotFound() : Ok(person);
+        var mappedPerson = PersonToPersonViewModelMapper.MapPersonToPersonViewModel(person);
+      
+        return Ok(mappedPerson);
     }
     
     [Route("all")]
     [HttpGet]
-    public ActionResult<IEnumerable<Person>> GetAll()
+    public ActionResult<List<PersonViewModel>> GetAll()
     {
-        return Ok(_personService.GetAll());
+        var personList = _personService.GetAll();
+        var  mappedPerson = PersonToPersonViewModelMapper.MapPersonToPersonViewModel(personList);
+        return Ok(mappedPerson);
     }
     
     [Route("update")]
     [HttpPut]
-    public ActionResult Update([FromBody] Person person)
+    public ActionResult Update([FromBody] PersonViewModel personViewModel)
     {
+        var person = PersonViewModelToPersonMapper.MapPersonViewModelToPerson(personViewModel);
         _personService.Update(person);
         return Ok();
     }
     
     [Route("add")]
     [HttpPost]
-    public ActionResult Add([FromBody] Person person)
+    public ActionResult Add([FromBody] PersonViewModel personViewModel)
     {
+        var person = PersonViewModelToPersonMapper.MapPersonViewModelToPerson(personViewModel);
         _personService.Add(person);
         return Ok();
     }

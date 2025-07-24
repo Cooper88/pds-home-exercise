@@ -1,0 +1,26 @@
+namespace UKParliament.CodeTest.Web.Validation;
+ 
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
+
+public class EmailAttribute : ValidationAttribute
+{
+    private static readonly Regex _emailRegex = new Regex(
+        @"^[^@\s]+@[^@\s]+\.[^@\s]+$", 
+        RegexOptions.IgnoreCase
+    );
+
+    public EmailAttribute()
+    {
+        ErrorMessage = "Invalid email address.";
+    }
+
+    public override bool IsValid(object value)
+    {
+        if (value == null)
+            return true; // If you need it required, use [Required] separately
+
+        var email = value.ToString();
+        return _emailRegex.IsMatch(email);
+    }
+}

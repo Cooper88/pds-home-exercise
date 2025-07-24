@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using UKParliament.CodeTest.Data;
 using UKParliament.CodeTest.Services;
+using UKParliament.CodeTest.Web.Mapping;
+using UKParliament.CodeTest.Web.ViewModels;
 
 namespace UKParliament.CodeTest.Web.Controllers;
 
@@ -18,9 +19,11 @@ public class DepartmentController  : ControllerBase
     
     [Route("all")]
     [HttpGet]
-    public ActionResult<IEnumerable<Department>> GetAll()
+    public ActionResult<List<DepartmentViewModel>> GetAll()
     {
-        return Ok(_departmentService.GetAll());
+        var departments = _departmentService.GetAll();
+        var mappedDepartments = DepartmentToDepartmentViewModelMapper.MapDepartmentToDepartmentViewModel(departments);
+        return Ok(mappedDepartments);
     }
     
 }
