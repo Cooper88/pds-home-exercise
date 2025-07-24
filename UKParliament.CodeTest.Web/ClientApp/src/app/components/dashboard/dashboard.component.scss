@@ -1,6 +1,11 @@
 header {
   margin-bottom: 1.3rem;
   text-align: center;
+  background-color: #373151;
+
+  h1 {
+    color: white;
+  }
 
   img {
     width: 200px;
@@ -14,10 +19,4 @@ header {
   }
 }
 
-table {
-  tbody {
-    td.group {
-      font-weight: bold;
-    }
-  }
-}
+

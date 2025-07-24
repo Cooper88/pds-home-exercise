@@ -1,0 +1,16 @@
+<header>
+  <h1>
+    <strong>
+      People Manager
+    </strong>
+  </h1>
+</header>
+
+
+<div>
+
+  <person-list (personIdEmitted)="onPersonSelected($event)"></person-list>
+
+  <person-editor  [personId]="selectedPersonId"></person-editor>
+</div>
+

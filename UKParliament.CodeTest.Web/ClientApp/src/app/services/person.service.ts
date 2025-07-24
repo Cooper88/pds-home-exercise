@@ -13,4 +13,15 @@ export class PersonService {
   getById(id: number): Observable<PersonViewModel> {
     return this.http.get<PersonViewModel>(this.baseUrl + `api/person/${id}`)
   }
+
+  getAll(): Observable<PersonViewModel[]> {
+    return this.http.get<PersonViewModel[]>(this.baseUrl + 'api/person/all');
+  }
+
+  update(person: any): Observable<any> {
+    const headers = {
+      'Content-Type': 'application/json',
+    }
+    return this.http.post(this.baseUrl + 'api/person/update', JSON.stringify(person), { headers: headers })
+  }
 }
