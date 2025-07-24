@@ -22,6 +22,13 @@ export class PersonService {
     const headers = {
       'Content-Type': 'application/json',
     }
-    return this.http.post(this.baseUrl + 'api/person/update', JSON.stringify(person), { headers: headers })
+    return this.http.put(this.baseUrl + 'api/person/update', JSON.stringify(person), { headers: headers })
+  }
+
+  add(person: any): Observable<any> {
+    const headers = {
+      'Content-Type': 'application/json',
+    }
+    return this.http.post(this.baseUrl + 'api/person/add', JSON.stringify(person), { headers: headers })
   }
 }

@@ -1,17 +1,36 @@
+<h2 *ngIf="personId == 0">Add New Person</h2>
+<h2 *ngIf="personId > 0">Edit Person</h2>
+
 <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
   <label>Firstname:
-    <input type="text" formControlName="firstname" />
+    <input type="text" formControlName="firstname"/>
   </label>
   <div *ngIf="personForm.get('firstname')?.invalid && personForm.get('firstname')?.touched">
     Firstname is required
   </div>
 
   <label>Last Name:
-    <input type="text" formControlName="lastname" />
+    <input type="text" formControlName="lastname"/>
   </label>
   <div *ngIf="personForm.get('lastname')?.invalid && personForm.get('lastname')?.touched">
     Last name is required
   </div>
+
+  <label>Date of Birth:
+    <input type="text" formControlName="dateOfBirth" placeholder="1991-01-01"/>
+  </label>
+  <div *ngIf="personForm.get('dateOfBirth')?.invalid && personForm.get('dateOfBirth')?.touched">
+    <small *ngIf="personForm.get('dateOfBirth')?.errors?.['required']">Date of birth is required.</small>
+    <small *ngIf="personForm.get('dateOfBirth')?.errors?.['invalidDate']">
+      {{ personForm.get('dateOfBirth')?.errors?.['invalidDate'] }}
+    </small>
+  </div>
+
+
+  <label for="department">Department:</label>
+  <select id="department" formControlName="department">
+    <option *ngFor="let department of departmentList" [value]="department.id">{{ department.name }}</option>
+  </select>
 
   <button type="submit" [disabled]="personForm.invalid">Submit</button>
 </form>

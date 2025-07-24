@@ -18,11 +18,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     // Get all people
-    this.personService.getAll().subscribe({
-      next: (persons => this.people = persons),
-      error: (error) => console.log(error),
-      complete: () => {console.log(this.people)}
-    });
+    this.getAll();
   }
 
   editPerson(personId: number): void {
@@ -30,10 +26,14 @@ export class ListComponent implements OnInit {
     this.personIdEmitted.emit(personId);
   }
 
-  // getPersonById(id: number): void {
-  //   this.personService.getById(id).subscribe({
-  //     next: (result) => console.info(`User returned: ${JSON.stringify(result)}`),
-  //     error: (e) => console.error(`Error: ${e}`)
-  //   });
-  // }
+  getAll() {
+    this.personService.getAll().subscribe({
+      next: (persons => this.people = persons),
+      error: (error) => console.log(error),
+      complete: () => {
+        console.log(this.people)
+      }
+    });
+  }
+
 }

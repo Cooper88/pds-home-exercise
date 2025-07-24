@@ -8,9 +8,10 @@
 
 
 <div>
+  <button (click)="addNewPerson()">Add New Person</button>
 
   <person-list (personIdEmitted)="onPersonSelected($event)"></person-list>
 
-  <person-editor  [personId]="selectedPersonId"></person-editor>
+  <person-editor (submitButtonClicked)="refreshPersonList()"  [personId]="selectedPersonId"></person-editor>
 </div>
 

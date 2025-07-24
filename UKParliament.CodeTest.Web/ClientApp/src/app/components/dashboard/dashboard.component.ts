@@ -1,39 +1,30 @@
-import {Component, OnInit} from '@angular/core';
-import {PersonService} from '../../services/person.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PersonViewModel} from "../../models/person-view-model";
+import {ListComponent} from "../list/list.component";
 
 @Component({
   selector: 'app-home',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
   people: PersonViewModel[] = [];
   selectedPersonId: number = 0;
 
-  constructor(private personService: PersonService) {
+  @ViewChild(ListComponent) listComponent!: ListComponent;
+
+  refreshPersonList() {
+    this.listComponent?.getAll();  // Call Child B's refresh method
   }
-
-  ngOnInit(): void {
-    // Get all people
-    // this.personService.getAll().subscribe({
-    //   next: (persons => this.people = persons),
-    //   error: (error) => console.log(error),
-    //   complete: () => {console.log(this.people)}
-    // });
-  }
-
-  // getPersonById(id: number): void {
-  //   this.personService.getById(id).subscribe({
-  //     next: (result) => console.info(`User returned: ${JSON.stringify(result)}`),
-  //     error: (e) => console.error(`Error: ${e}`)
-  //   });
-  // }
-
   onPersonSelected(personId: number) {
     this.selectedPersonId = personId;
-    console.log('onPersonSelected:', personId);
-    console.log('selectedPersonId ', this.selectedPersonId);
+    // console.log('onPersonSelected:', personId);
+    // console.log('selectedPersonId ', this.selectedPersonId);
   }
+
+  addNewPerson() {
+    this.selectedPersonId = 0;
+  }
+
 }
