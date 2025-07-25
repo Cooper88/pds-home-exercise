@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using UKParliament.CodeTest.Web.Validation;
 
 namespace UKParliament.CodeTest.Web.ViewModels;
@@ -18,8 +19,11 @@ public class PersonViewModel
     [Date]
     public string DateOfBirth { get; set; }
     
-    [Required(ErrorMessage = "Department is required")]
+    [Required(ErrorMessage = "Department is required.")]
     public int DepartmentId { get; set; }
+    
+    [ValidateNever]
+    public string DepartmentName { get; set; }
     
     [Required]
     [Email]

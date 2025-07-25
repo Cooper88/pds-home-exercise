@@ -22,7 +22,7 @@ public class DepartmentController  : ControllerBase
     public ActionResult<List<DepartmentViewModel>> GetAll()
     {
         var departments = _departmentService.GetAll();
-        var mappedDepartments = DepartmentToDepartmentViewModelMapper.MapDepartmentToDepartmentViewModel(departments);
+        var mappedDepartments = DepartmentViewModelMapper.MapToDepartmentViewModel(departments);
         return Ok(mappedDepartments);
     }
     

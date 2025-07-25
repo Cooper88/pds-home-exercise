@@ -10,10 +10,13 @@ namespace UKParliament.CodeTest.Web.Controllers;
 public class PersonController : ControllerBase
 {
     private readonly IPersonService _personService;
+    private readonly IDepartmentService _departmentService;
     
-    public PersonController(IPersonService personService)
+    public PersonController(IPersonService personService,
+        IDepartmentService departmentService)
     {
      _personService = personService;
+     _departmentService = departmentService;
     }
     
     [Route("{id:int}")]
@@ -25,7 +28,7 @@ public class PersonController : ControllerBase
 
         if (person == null) return NotFound();
         
-        var mappedPerson = PersonToPersonViewModelMapper.MapPersonToPersonViewModel(person);
+        var mappedPerson = PersonViewModelMapper.MapToPersonViewModel(person);
       
         return Ok(mappedPerson);
     }
@@ -35,15 +38,16 @@ public class PersonController : ControllerBase
     public ActionResult<List<PersonViewModel>> GetAll()
     {
         var personList = _personService.GetAll();
-        var  mappedPerson = PersonToPersonViewModelMapper.MapPersonToPersonViewModel(personList);
-        return Ok(mappedPerson);
+        var departmentList = _departmentService.GetAll();
+        var  mappedPersonList = PersonViewModelMapper.MapToPersonViewModel(personList, departmentList.ToList());
+        return Ok(mappedPersonList);
     }
     
     [Route("update")]
     [HttpPut]
     public ActionResult Update([FromBody] PersonViewModel personViewModel)
     {
-        var person = PersonViewModelToPersonMapper.MapPersonViewModelToPerson(personViewModel);
+        var person = PersonMapper.MapToPerson(personViewModel);
         _personService.Update(person);
         return Ok();
     }
@@ -52,7 +56,7 @@ public class PersonController : ControllerBase
     [HttpPost]
     public ActionResult Add([FromBody] PersonViewModel personViewModel)
     {
-        var person = PersonViewModelToPersonMapper.MapPersonViewModelToPerson(personViewModel);
+        var person = PersonMapper.MapToPerson(personViewModel);
         _personService.Add(person);
         return Ok();
     }

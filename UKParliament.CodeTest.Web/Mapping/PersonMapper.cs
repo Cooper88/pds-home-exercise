@@ -4,10 +4,10 @@ using UKParliament.CodeTest.Web.ViewModels;
 namespace UKParliament.CodeTest.Web.Mapping;
  
 
-public static class PersonViewModelToPersonMapper
+public static class PersonMapper
 {
 
-    public static Person MapPersonViewModelToPerson(PersonViewModel person)
+    public static Person MapToPerson(PersonViewModel person)
     {
         return new Person()
         {
