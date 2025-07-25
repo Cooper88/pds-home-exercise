@@ -4,14 +4,14 @@ export function dateValidator(control: AbstractControl): ValidationErrors | null
   const value = control.value;
   if (!value) return null;
 
-  // Check format YYYY-MM-DD
-  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  // Check format DD/MM/YYYY
+  const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
   if (!dateRegex.test(value)) {
-    return { invalidDate: 'Invalid format. Accepted format is YYYY-MM-DD.' };
+    return { invalidDate: 'Invalid format. Accepted format is DD/MM/YYYY.' };
   }
 
   // Check if it's a valid date
-  const [year, month, day] = value.split('-').map(Number);
+  const [day, month, year] = value.split('/').map(Number);
   const date = new Date(year, month - 1, day);
 
   if (
@@ -19,8 +19,8 @@ export function dateValidator(control: AbstractControl): ValidationErrors | null
     date.getMonth() + 1 !== month ||
     date.getDate() !== day
   ) {
-    return { invalidDate: 'This date does not exist.' };
+    return { invalidDate: 'This date is invalid.' };
   }
 
-  return null; // Valid date
+  return null;
 }

@@ -17,10 +17,10 @@
   </div>
 
   <label>Date of Birth:
-    <input type="text" formControlName="dateOfBirth" placeholder="1991-01-01"/>
+    <input type="text" formControlName="dateOfBirth" placeholder="01/01/1990"/>
   </label>
   <div *ngIf="personForm.get('dateOfBirth')?.invalid && personForm.get('dateOfBirth')?.touched">
-    <small *ngIf="personForm.get('dateOfBirth')?.errors?.['required']">Date of birth is required.</small>
+    <small *ngIf="personForm.get('dateOfBirth')?.errors?.['required']">Date of Birth is required.</small>
     <small *ngIf="personForm.get('dateOfBirth')?.errors?.['invalidDate']">
       {{ personForm.get('dateOfBirth')?.errors?.['invalidDate'] }}
     </small>

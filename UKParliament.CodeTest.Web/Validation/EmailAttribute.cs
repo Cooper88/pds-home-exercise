@@ -18,7 +18,7 @@ public class EmailAttribute : ValidationAttribute
     public override bool IsValid(object value)
     {
         if (value == null)
-            return true; // If you need it required, use [Required] separately
+            return true;
 
         var email = value.ToString();
         return _emailRegex.IsMatch(email);

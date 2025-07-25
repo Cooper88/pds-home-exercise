@@ -14,7 +14,7 @@ public static class PersonViewModelToPersonMapper
             Id = person.Id,
             FirstName = person.FirstName,
             LastName = person.LastName,
-            DateOfBirth = person.DateOfBirth,
+            DateOfBirth = DateOnly.Parse(person.DateOfBirth),
             DepartmentId = person.DepartmentId,
             EmailAddress = person.EmailAddress
         };

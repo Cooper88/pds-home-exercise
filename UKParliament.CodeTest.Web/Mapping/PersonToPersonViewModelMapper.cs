@@ -13,7 +13,7 @@ public static class PersonToPersonViewModelMapper
             Id = person.Id,
             FirstName = person.FirstName,
             LastName = person.LastName,
-            DateOfBirth = person.DateOfBirth,
+            DateOfBirth = person.DateOfBirth.ToString("dd/MM/yyyy"),
             DepartmentId = person.DepartmentId,
             EmailAddress = person.EmailAddress
         };

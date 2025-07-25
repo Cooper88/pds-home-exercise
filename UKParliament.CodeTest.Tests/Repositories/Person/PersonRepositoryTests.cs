@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using UKParliament.CodeTest.Data;
 using UKParliament.CodeTest.Data.Repositories.Person;
 using Xunit;
