@@ -1,13 +1,13 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import {AbstractControl, ValidationErrors} from '@angular/forms';
 
-export function dateValidator(control: AbstractControl): ValidationErrors | null {
+export function birthDateValidator(control: AbstractControl): ValidationErrors | null {
   const value = control.value;
   if (!value) return null;
 
   // Check format DD/MM/YYYY
   const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
   if (!dateRegex.test(value)) {
-    return { invalidDate: 'Invalid format. Accepted format is DD/MM/YYYY.' };
+    return {invalidDate: 'Invalid format. Accepted format is DD/MM/YYYY.'};
   }
 
   // Check if it's a valid date
@@ -19,7 +19,11 @@ export function dateValidator(control: AbstractControl): ValidationErrors | null
     date.getMonth() + 1 !== month ||
     date.getDate() !== day
   ) {
-    return { invalidDate: 'This date is invalid.' };
+    return {invalidDate: 'This date is invalid.'};
+  }
+
+  if (date > new Date()) {
+    return {invalidDate: 'Date is in the future.'};
   }
 
   return null;

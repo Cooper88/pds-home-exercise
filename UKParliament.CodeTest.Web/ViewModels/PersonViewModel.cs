@@ -16,7 +16,7 @@ public class PersonViewModel
     public string LastName { get; set; }
     
     [Required]
-    [Date]
+    [BirthDate]
     public string DateOfBirth { get; set; }
     
     [Required(ErrorMessage = "Department is required.")]

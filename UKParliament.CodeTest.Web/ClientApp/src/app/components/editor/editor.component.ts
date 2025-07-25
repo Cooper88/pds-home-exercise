@@ -4,7 +4,7 @@ import {PersonViewModel} from "../../models/person-view-model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DepartmentViewModel} from "../../models/department-view-model";
 import {DepartmentService} from "../../services/department.service";
-import {dateValidator} from "../../validators/dateValidator";
+import {birthDateValidator} from "../../validators/birthDateValidator";
 
 @Component({
   selector: 'person-editor',
@@ -41,7 +41,7 @@ export class EditorComponent implements OnChanges, OnInit {
       department: ['', Validators.required],
       dateOfBirth: ['', [
         Validators.required,
-        dateValidator]
+        birthDateValidator]
       ],
       email: ['', [
         Validators.required,
