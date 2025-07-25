@@ -5,18 +5,17 @@ header {
 
   h1 {
     color: white;
-  }
-
-  img {
-    width: 200px;
-    display: inline-block;
-    margin-bottom: 15px;
-
-    @media (min-width: 700px) {
-      width: 250px;
-      margin-bottom: 35px;
-    }
+    padding:10px 0 10px 0;
   }
 }
 
+.flex-container {
+  display: flex;
+}
 
+
+@media (max-width: 900px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}

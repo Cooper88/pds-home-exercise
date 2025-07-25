@@ -1,0 +1,21 @@
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding-top:10px;
+}
+
+@media (max-width: 800px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}
+
+.container-item {
+  border: 1px solid lightgray;
+  width:350px;
+  border-radius: 5px;
+  padding:10px;
+  margin: 0 10px 10px 0;
+}

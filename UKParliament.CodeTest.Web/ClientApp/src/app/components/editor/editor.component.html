@@ -1,46 +1,60 @@
-<h2 *ngIf="personId == 0">Add New Person</h2>
-<h2 *ngIf="personId > 0">Edit Person</h2>
+<div id="editor-container">
+  <h2 *ngIf="personId == 0">Add New Person</h2>
+  <h2 *ngIf="personId > 0">Edit Person</h2>
 
-<form [formGroup]="personForm" (ngSubmit)="onSubmit()">
-  <label>Firstname:
-    <input type="text" formControlName="firstname"/>
-  </label>
-  <div *ngIf="personForm.get('firstname')?.invalid && personForm.get('firstname')?.touched">
-    Firstname is required
-  </div>
+  <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
+    <label for="firstname">First name * </label>
+    <input type="text" formControlName="firstname" id="firstname"/>
 
-  <label>Last Name:
-    <input type="text" formControlName="lastname"/>
-  </label>
-  <div *ngIf="personForm.get('lastname')?.invalid && personForm.get('lastname')?.touched">
-    Last name is required
-  </div>
+    <div *ngIf="personForm.get('firstname')?.invalid && personForm.get('firstname')?.touched">
+      <small>First name is required.</small>
+    </div>
 
-  <label>Date of Birth:
-    <input type="text" formControlName="dateOfBirth" placeholder="01/01/1990"/>
-  </label>
-  <div *ngIf="personForm.get('dateOfBirth')?.invalid && personForm.get('dateOfBirth')?.touched">
-    <small *ngIf="personForm.get('dateOfBirth')?.errors?.['required']">Date of Birth is required.</small>
-    <small *ngIf="personForm.get('dateOfBirth')?.errors?.['invalidDate']">
-      {{ personForm.get('dateOfBirth')?.errors?.['invalidDate'] }}
-    </small>
-  </div>
+    <br/>
 
-  <label>Email:
-    <input type="text" formControlName="email"/>
-  </label>
-  <div *ngIf="personForm.get('email')?.invalid && personForm.get('email')?.touched">
-    <small *ngIf="personForm.get('email')?.errors?.['required']">Email is required.</small>
-    <small *ngIf="personForm.get('email')?.errors?.['email']">
-      Email address invalid.
-    </small>
-  </div>
+    <label for="lastname">Last name * </label>
+    <input type="text" formControlName="lastname" id="lastname"/>
 
-  <label for="department">Department:</label>
-  <select id="department" formControlName="department">
-    <option *ngFor="let department of departmentList" [value]="department.id">{{ department.name }}</option>
-  </select>
+    <div *ngIf="personForm.get('lastname')?.invalid && personForm.get('lastname')?.touched">
+      <small>Last name is required.</small>
+    </div>
 
-  <button type="submit" [disabled]="personForm.invalid">Submit</button>
-</form>
+    <br/>
 
+    <label>Date of Birth *</label>
+    <input type="text" formControlName="dateOfBirth" placeholder="01/01/1990" id="dateOfBirth"/>
+    <div *ngIf="personForm.get('dateOfBirth')?.invalid && personForm.get('dateOfBirth')?.touched">
+      <small *ngIf="personForm.get('dateOfBirth')?.errors?.['required']">Date of Birth is required.</small>
+      <small *ngIf="personForm.get('dateOfBirth')?.errors?.['invalidDate']">
+        {{ personForm.get('dateOfBirth')?.errors?.['invalidDate'] }}
+      </small>
+    </div>
+
+    <br/>
+
+    <label for="email">Email * </label>
+    <input type="text" formControlName="email" id="email"/>
+
+    <div *ngIf="personForm.get('email')?.invalid && personForm.get('email')?.touched">
+      <small *ngIf="personForm.get('email')?.errors?.['required']">Email is required.</small>
+      <small *ngIf="personForm.get('email')?.errors?.['email']">
+        Email address invalid.
+      </small>
+    </div>
+
+    <br/>
+
+    <label for="department">Department *</label>
+    <select id="department" formControlName="department">
+      <option *ngFor="let department of departmentList" [value]="department.id">{{ department.name }}</option>
+    </select>
+
+    <br/>
+    <br/>
+
+    <p>Fields marked with an asterisk (*) are required.</p>
+    <button type="submit" [disabled]="personForm.invalid">Submit</button>
+
+  </form>
+
+</div>

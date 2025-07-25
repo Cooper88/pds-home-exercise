@@ -6,12 +6,17 @@
   </h1>
 </header>
 
-
-<div>
-  <button (click)="addNewPerson()">Add New Person</button>
-
-  <person-list (personIdEmitted)="onPersonSelected($event)"></person-list>
-
-  <person-editor (submitButtonClicked)="refreshPersonList()"  [personId]="selectedPersonId"></person-editor>
-</div>
+<main role="main">
+  <div>
+    <button (click)="addNewPerson()">Add New Person</button>
+  </div>
+  <div class="flex-container">
+    <div style="flex: 4;">
+      <person-list (personIdEmitted)="onPersonSelected($event)"></person-list>
+    </div>
+    <div style="flex: 2;">
+      <person-editor (submitButtonClicked)="refreshPersonList()" [personId]="selectedPersonId"></person-editor>
+    </div>
+  </div>
+</main>
 
