@@ -20,6 +20,7 @@ public class PersonViewModel
     public string DateOfBirth { get; set; }
     
     [Required(ErrorMessage = "Department is required.")]
+    [Department]
     public int DepartmentId { get; set; }
     
     [ValidateNever]
