@@ -51,7 +51,7 @@ public class DepartmentAttributeTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal("A valid DepartmentId is required.", result.ErrorMessage);
+        Assert.Equal("A valid Department is required.", result.ErrorMessage);
     }
 
     private static ValidationContext CreateValidationContext(IDepartmentService departmentService)
