@@ -1,7 +1,7 @@
-namespace UKParliament.CodeTest.Web.Validation;
- 
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+
+namespace UKParliament.CodeTest.Web.ValidationAttributes;
 
 public class PresentOrPastDateAttribute : ValidationAttribute
 {
@@ -11,11 +11,6 @@ public class PresentOrPastDateAttribute : ValidationAttribute
 
     public override bool IsValid(object value)
     {
-        if (value == null)
-        {
-            return true;
-        }
-        
         var date = value.ToString();
 
         // Check if format matches regex

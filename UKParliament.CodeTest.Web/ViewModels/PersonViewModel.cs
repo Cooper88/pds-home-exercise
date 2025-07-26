@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using UKParliament.CodeTest.Web.Validation;
+using UKParliament.CodeTest.Web.ValidationAttributes;
 
 namespace UKParliament.CodeTest.Web.ViewModels;
 

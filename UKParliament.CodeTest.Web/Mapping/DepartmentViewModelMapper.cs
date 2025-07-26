@@ -3,9 +3,9 @@ using UKParliament.CodeTest.Web.ViewModels;
 
 namespace UKParliament.CodeTest.Web.Mapping;
 
-public class DepartmentViewModelMapper
+public static class DepartmentViewModelMapper
 {
-    public static DepartmentViewModel MapToDepartmentViewModel(Department department)
+    private static DepartmentViewModel MapToDepartmentViewModel(Department department)
     {
         return new DepartmentViewModel()
         {

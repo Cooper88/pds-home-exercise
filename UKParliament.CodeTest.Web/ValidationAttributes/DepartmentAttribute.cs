@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using UKParliament.CodeTest.Services;
 
-namespace UKParliament.CodeTest.Web.Validation;
+namespace UKParliament.CodeTest.Web.ValidationAttributes;
 
 public class DepartmentAttribute : ValidationAttribute
 {
@@ -12,11 +12,6 @@ public class DepartmentAttribute : ValidationAttribute
     
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
-        if (value == null)
-        {
-            return ValidationResult.Success;
-        }
-        
         var departmentId = Convert.ToInt32(value);
         var departmentService = validationContext.GetService(typeof(IDepartmentService)) as IDepartmentService;
         

@@ -17,7 +17,8 @@ public static class PersonViewModelMapper
             EmailAddress = person.EmailAddress,
         };
     }
-    public static PersonViewModel MapToPersonViewModel(Person person, List<Department> departmentList)
+
+    private static PersonViewModel MapToPersonViewModel(Person person, List<Department> departmentList)
     {
         return new PersonViewModel()
         {

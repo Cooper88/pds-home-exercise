@@ -1,7 +1,7 @@
-namespace UKParliament.CodeTest.Web.Validation;
- 
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+
+namespace UKParliament.CodeTest.Web.ValidationAttributes;
 
 public class EmailAttribute : ValidationAttribute
 {
@@ -17,9 +17,6 @@ public class EmailAttribute : ValidationAttribute
 
     public override bool IsValid(object value)
     {
-        if (value == null)
-            return true;
-
         var email = value.ToString();
         return _emailRegex.IsMatch(email);
     }
