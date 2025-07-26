@@ -11,8 +11,8 @@ public class DepartmentRepository : IDepartmentRepository
         _context = context;
     }
 
-    public IEnumerable<Department> GetAll()
+    public List<Department> GetAll()
     {
-        return _context.Departments.ToList();
+        return _context.Departments.OrderBy(i => i.Name).ToList();
     }
 }

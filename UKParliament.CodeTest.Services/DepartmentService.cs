@@ -11,7 +11,7 @@ public class DepartmentService : IDepartmentService
         _departmentRepository = departmentRepository;
     }
 
-    public IEnumerable<Department> GetAll()
+    public List<Department> GetAll()
     {
         return _departmentRepository.GetAll();
     }

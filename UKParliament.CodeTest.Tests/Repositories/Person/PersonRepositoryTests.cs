@@ -41,6 +41,24 @@ public class PersonRepositoryTests : BaseRepository
     }
 
     [Fact]
+    public void PersonRepository_Get_ReturnsNull()
+    {
+        var options = CreateNewContextOptions();
+
+        using var context = new PersonManagerContext(options);
+        var person = CreatePerson();
+        
+        context.People.Add(person);
+        context.SaveChanges();
+
+        var repo = new PersonRepository(context);
+        var result = repo.Get(2);
+
+        Assert.Null(result);
+       
+    }
+    
+    [Fact]
     public void PersonRepository_GetAll_ReturnsAllPeople()
     {
         var options = CreateNewContextOptions();
@@ -59,7 +77,7 @@ public class PersonRepositoryTests : BaseRepository
 
         Assert.Equal(3, result.Count());
     }
-
+    
     [Fact]
     public void PersonRepository_Update_UpdatesExistingPerson()
     {

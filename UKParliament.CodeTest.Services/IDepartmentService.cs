@@ -4,5 +4,5 @@ namespace UKParliament.CodeTest.Services;
 
 public interface IDepartmentService
 {
-    IEnumerable<Department> GetAll();
+    List<Department> GetAll();
 }

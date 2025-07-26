@@ -12,12 +12,12 @@ public class PersonService : IPersonService
         _personRepository = personRepository;
     }
 
-    public Person Get(int id)
+    public Person? Get(int id)
     {
         return _personRepository.Get(id);
     }
 
-    public IEnumerable<Person> GetAll()
+    public List<Person> GetAll()
     {
         return _personRepository.GetAll();
     }

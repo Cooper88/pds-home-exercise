@@ -3,5 +3,5 @@ using Data;
 
 public interface IDepartmentRepository
 {
-    IEnumerable<Department> GetAll();
+    List<Department> GetAll();
 }

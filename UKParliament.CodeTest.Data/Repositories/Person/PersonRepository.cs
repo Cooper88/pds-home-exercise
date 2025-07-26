@@ -11,14 +11,14 @@ public class PersonRepository : IPersonRepository
         _context = context;
     }
 
-    public Person Get(int id)
+    public Person? Get(int id)
     {
-        return _context.People.Find(id)!;
+        return _context.People.Find(id);
     }
 
-    public IEnumerable<Person> GetAll()
+    public List<Person> GetAll()
     {
-        return _context.People.ToList();
+        return _context.People.OrderBy(i => i.Id).ToList();
     }
 
     public void Update(Person person)

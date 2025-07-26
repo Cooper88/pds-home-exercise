@@ -53,7 +53,7 @@ export class EditorComponent implements OnChanges, OnInit {
     this.departmentService.getAll().subscribe({
       next: result => {
         this.departmentList = result;
-        this.personForm.controls['department'].setValue(1);
+        this.personForm.controls['department'].setValue(this.departmentList[0].id);
       },
       error: (e) => console.error(`Error: ${e}`)
     })
@@ -113,7 +113,7 @@ export class EditorComponent implements OnChanges, OnInit {
   resetPersonEditor() {
     this.personForm.reset();
     this.selectedPersonId = 0;
-    this.personForm.controls['department'].setValue(1);
+    this.personForm.controls['department'].setValue(this.departmentList[0].id);
 
     this.submitButtonClicked.emit();
   }
