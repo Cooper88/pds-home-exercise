@@ -1,18 +1,20 @@
+$colour-red: #9E0000;
+
 #editor-container {
   border-radius: 5px;
   border: 1px solid lightgray;
-  margin-top: 10px;
-  padding: 10px;
+  margin-top: 1rem;
+  padding: 1rem;
 
   small {
-    color:#9E0000;
+    color: $colour-red;
   }
 
   label {
-    width:100%;
+    width: 100%;
   }
 
   input {
-    width:100%;
+    width: 100%;
   }
 }

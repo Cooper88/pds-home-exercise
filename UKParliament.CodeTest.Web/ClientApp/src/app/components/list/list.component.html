@@ -1,11 +1,11 @@
 <div class="flex-container">
 
   <div class="container-item" *ngFor="let person of people">
-    <strong>{{ person.firstName }}
-      {{ person.lastName }} </strong> <br />
-    Email: {{ person.emailAddress }} <br />
-    Date of Birth: {{ person.dateOfBirth }} <br />
-    Department: {{ person.departmentName }} <br />
+    <strong>{{ person.firstName }} {{ person.lastName }} </strong>
+    <hr/>
+    <strong>Email</strong> <br /> {{ person.emailAddress }} <br />
+    <strong>Date of Birth</strong> <br /> {{ person.dateOfBirth }} <br />
+    <strong>Department</strong> <br /> {{ person.departmentName }} <br />
     <button (click)="editPerson(person.id)">Edit</button>
   </div>
 

@@ -3,19 +3,25 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-content: flex-start;
-  padding-top:10px;
+  padding-top: 1rem;
+
+  .container-item {
+    border: 1px solid lightgray;
+    width: 350px;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 0 1rem 1rem 0;
+  }
+
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .flex-container {
     flex-direction: column;
+
+    .container-item {
+      width: 100%;
+    }
   }
 }
 
-.container-item {
-  border: 1px solid lightgray;
-  width:350px;
-  border-radius: 5px;
-  padding:10px;
-  margin: 0 10px 10px 0;
-}

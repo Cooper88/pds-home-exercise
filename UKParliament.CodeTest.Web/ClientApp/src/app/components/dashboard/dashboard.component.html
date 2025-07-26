@@ -1,7 +1,7 @@
 <header>
   <h1>
     <strong>
-      People Manager
+      Person Manager
     </strong>
   </h1>
 </header>
@@ -11,10 +11,10 @@
     <button (click)="addNewPerson()">Add New Person</button>
   </div>
   <div class="flex-container">
-    <div style="flex: 4;">
+    <div id="left-panel">
       <person-list (personIdEmitted)="onPersonSelected($event)"></person-list>
     </div>
-    <div style="flex: 2;">
+    <div id="right-panel">
       <person-editor (submitButtonClicked)="refreshPersonList()" [personId]="selectedPersonId"></person-editor>
     </div>
   </div>
