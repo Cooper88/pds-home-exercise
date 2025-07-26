@@ -1,6 +1,6 @@
 import {AbstractControl, ValidationErrors} from '@angular/forms';
 
-export function birthDateValidator(control: AbstractControl): ValidationErrors | null {
+export function presentOrPastDateValidator(control: AbstractControl): ValidationErrors | null {
   const value = control.value;
   if (!value) return null;
 
@@ -22,6 +22,7 @@ export function birthDateValidator(control: AbstractControl): ValidationErrors |
     return {invalidDate: 'This date is invalid.'};
   }
 
+  // Check if date is in the future
   if (date > new Date()) {
     return {invalidDate: 'Date is in the future.'};
   }
