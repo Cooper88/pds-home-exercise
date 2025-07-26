@@ -15,12 +15,10 @@ export class DashboardComponent {
   @ViewChild(ListComponent) listComponent!: ListComponent;
 
   refreshPersonList() {
-    this.listComponent?.getAll();  // Call Child B's refresh method
+    this.listComponent?.getAll();
   }
   onPersonSelected(personId: number) {
     this.selectedPersonId = personId;
-    // console.log('onPersonSelected:', personId);
-    // console.log('selectedPersonId ', this.selectedPersonId);
   }
 
   addNewPerson() {

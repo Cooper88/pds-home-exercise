@@ -25,7 +25,6 @@ export class EditorComponent implements OnChanges, OnInit {
     if (changes['personId']) {
       this.resetPersonEditor();
       const personId: number = changes['personId'].currentValue;
-      // console.log('New value:', changes['personId'].currentValue);
       if (personId > 0) {
         this.getPersonById(personId);
       }
@@ -80,16 +79,16 @@ export class EditorComponent implements OnChanges, OnInit {
 
   onSubmit() {
 
-    if (this.selectedPersonId > 0) {
+    const payload: PersonViewModel = {
+      id: this.selectedPersonId,
+      firstName: this.personForm.controls['firstname'].value,
+      lastName: this.personForm.controls['lastname'].value,
+      departmentId: this.personForm.controls['department'].value,
+      dateOfBirth: this.personForm.controls['dateOfBirth'].value,
+      emailAddress: this.personForm.controls['email'].value
+    }
 
-      let payload = {
-        id: this.personId,
-        firstName: this.personForm.controls['firstname'].value,
-        lastName: this.personForm.controls['lastname'].value,
-        departmentId: this.personForm.controls['department'].value,
-        dateOfBirth: this.personForm.controls['dateOfBirth'].value,
-        emailAddress: this.personForm.controls['email'].value
-      }
+    if (this.selectedPersonId > 0) {
 
       this.personService.update(payload).subscribe({
         next: () => this.resetPersonEditor(),
@@ -98,18 +97,11 @@ export class EditorComponent implements OnChanges, OnInit {
 
     } else {
 
-      let payload = {
-        firstName: this.personForm.controls['firstname'].value,
-        lastName: this.personForm.controls['lastname'].value,
-        departmentId: this.personForm.controls['department'].value,
-        dateOfBirth: this.personForm.controls['dateOfBirth'].value,
-        emailAddress: this.personForm.controls['email'].value
-      }
-
       this.personService.add(payload).subscribe({
         next: () => this.resetPersonEditor(),
         error: (e) => console.error(`Error: ${e}`)
       });
+
     }
 
     console.log('Form submitted');
