@@ -17,12 +17,10 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Get all people
     this.getAll();
   }
 
   editPerson(personId: number): void {
-    console.log('clicked ', personId);
     this.personIdEmitted.emit(personId);
   }
 
@@ -30,9 +28,6 @@ export class ListComponent implements OnInit {
     this.personService.getAll().subscribe({
       next: (persons => this.people = persons),
       error: (error) => console.log(error),
-      complete: () => {
-        console.log(this.people)
-      }
     });
   }
 
