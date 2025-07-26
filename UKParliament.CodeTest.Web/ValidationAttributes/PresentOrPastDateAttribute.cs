@@ -9,8 +9,13 @@ public class PresentOrPastDateAttribute : ValidationAttribute
         @"^\d{2}/\d{2}/\d{4}$"
     );
 
-    public override bool IsValid(object value)
+    public override bool IsValid(object? value)
     {
+        if (value == null)
+        {
+            return true; // Required attribute takes care of this check.
+        }
+        
         var date = value.ToString();
 
         // Check if format matches regex

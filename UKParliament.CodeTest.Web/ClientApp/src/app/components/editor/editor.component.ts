@@ -14,12 +14,30 @@ import {presentOrPastDateValidator} from "../../validators/presentOrPastDateVali
 export class EditorComponent implements OnChanges, OnInit {
 
   @Input() personId: number = 0;
-  personForm: FormGroup;
-  selectedPersonId: number = 0;
 
+  personForm: FormGroup = this.fb.group({
+    firstname: ['', Validators.required],
+    lastname: ['', Validators.required],
+    department: ['', Validators.required],
+    dateOfBirth: ['', [
+      Validators.required,
+      presentOrPastDateValidator]
+    ],
+    email: ['', [
+      Validators.required,
+      Validators.email]
+    ],
+  });
+
+  selectedPersonId: number = 0;
   departmentList: DepartmentViewModel[] = [];
 
   @Output() submitButtonClicked = new EventEmitter<void>();
+
+  constructor(private fb: FormBuilder,
+              private personService: PersonService,
+              private departmentService: DepartmentService) {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['personId']) {
@@ -31,33 +49,15 @@ export class EditorComponent implements OnChanges, OnInit {
     }
   }
 
-  constructor(private fb: FormBuilder,
-              private personService: PersonService,
-              private departmentService: DepartmentService) {
-    this.personForm = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      department: ['', Validators.required],
-      dateOfBirth: ['', [
-        Validators.required,
-        presentOrPastDateValidator]
-      ],
-      email: ['', [
-        Validators.required,
-        Validators.email]
-      ],
-    });
-  }
-
   ngOnInit(): void {
     this.departmentService.getAll().subscribe({
       next: result => {
         this.departmentList = result;
+        this.personForm.controls['department'].setValue(1);
       },
       error: (e) => console.error(`Error: ${e}`)
     })
   }
-
 
   getPersonById(id: number): void {
     this.personService.getById(id).subscribe({
@@ -92,26 +92,54 @@ export class EditorComponent implements OnChanges, OnInit {
 
       this.personService.update(payload).subscribe({
         next: () => this.resetPersonEditor(),
-        error: (e) => console.error(`Error: ${e}`)
+        error: result => {
+          this.processServerErrors(result);
+        }
       });
 
     } else {
 
       this.personService.add(payload).subscribe({
         next: () => this.resetPersonEditor(),
-        error: (e) => console.error(`Error: ${e}`)
+        error: result => {
+          this.processServerErrors(result);
+        }
       });
 
     }
 
-    console.log('Form submitted');
   }
 
   resetPersonEditor() {
     this.personForm.reset();
     this.selectedPersonId = 0;
+    this.personForm.controls['department'].setValue(1);
 
     this.submitButtonClicked.emit();
+  }
+
+  processServerErrors(data: any) {
+
+    if (data.error.errors?.FirstName?.length > 0) {
+      this.personForm.get('firstname')?.setErrors({serverError: data.error.errors?.FirstName[0]});
+    }
+
+    if (data.error.errors?.LastName?.length > 0) {
+      this.personForm.get('lastname')?.setErrors({serverError: data.error.errors?.LastName[0]});
+    }
+
+    if (data.error.errors?.DateOfBirth?.length > 0) {
+      this.personForm.get('dateOfBirth')?.setErrors({serverError: data.error.errors?.DateOfBirth[0]});
+    }
+
+    if (data.error.errors?.EmailAddress?.length > 0) {
+      this.personForm.get('email')?.setErrors({serverError: data.error.errors?.EmailAddress[0]});
+    }
+
+    if (data.error.errors?.DepartmentId?.length > 0) {
+      this.personForm.get('department')?.setErrors({serverError: data.error.errors?.DepartmentId[0]});
+    }
+
   }
 
 }

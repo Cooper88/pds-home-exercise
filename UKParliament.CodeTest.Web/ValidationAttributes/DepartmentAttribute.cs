@@ -7,11 +7,16 @@ public class DepartmentAttribute : ValidationAttribute
 {
     public DepartmentAttribute()
     {
-        ErrorMessage = "A valid DepartmentId is required.";
+        ErrorMessage = "A valid Department is required.";
     }
     
-    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+    protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
+        if (value == null)
+        {
+            return ValidationResult.Success; // Required attribute takes care of this check.
+        }
+        
         var departmentId = Convert.ToInt32(value);
         var departmentService = validationContext.GetService(typeof(IDepartmentService)) as IDepartmentService;
         

@@ -6,8 +6,11 @@
     <label for="firstname">First name * </label>
     <input type="text" formControlName="firstname" id="firstname"/>
 
-    <div *ngIf="personForm.get('firstname')?.invalid && personForm.get('firstname')?.touched">
-      <small>First name is required.</small>
+    <div *ngIf="personForm.get('firstname')?.invalid">
+      <small *ngIf="personForm.get('firstname')?.errors?.['required']">First name is required.</small>
+      <small *ngIf="personForm.get('firstname')?.errors?.['serverError']">
+        {{ personForm.get('firstname')?.errors?.['serverError'] }}
+      </small>
     </div>
 
     <br/>
@@ -15,18 +18,24 @@
     <label for="lastname">Last name * </label>
     <input type="text" formControlName="lastname" id="lastname"/>
 
-    <div *ngIf="personForm.get('lastname')?.invalid && personForm.get('lastname')?.touched">
-      <small>Last name is required.</small>
+    <div *ngIf="personForm.get('lastname')?.invalid">
+      <small *ngIf="personForm.get('lastname')?.errors?.['required']">Last name is required.</small>
+      <small *ngIf="personForm.get('lastname')?.errors?.['serverError']">
+        {{ personForm.get('lastname')?.errors?.['serverError'] }}
+      </small>
     </div>
 
     <br/>
 
     <label>Date of Birth *</label>
     <input type="text" formControlName="dateOfBirth" placeholder="01/01/1990" id="dateOfBirth"/>
-    <div *ngIf="personForm.get('dateOfBirth')?.invalid && personForm.get('dateOfBirth')?.touched">
+    <div *ngIf="personForm.get('dateOfBirth')?.invalid">
       <small *ngIf="personForm.get('dateOfBirth')?.errors?.['required']">Date of Birth is required.</small>
       <small *ngIf="personForm.get('dateOfBirth')?.errors?.['invalidDate']">
         {{ personForm.get('dateOfBirth')?.errors?.['invalidDate'] }}
+      </small>
+      <small *ngIf="personForm.get('dateOfBirth')?.errors?.['serverError']">
+        {{ personForm.get('dateOfBirth')?.errors?.['serverError'] }}
       </small>
     </div>
 
@@ -35,10 +44,13 @@
     <label for="email">Email * </label>
     <input type="text" formControlName="email" id="email"/>
 
-    <div *ngIf="personForm.get('email')?.invalid && personForm.get('email')?.touched">
+    <div *ngIf="personForm.get('email')?.invalid">
       <small *ngIf="personForm.get('email')?.errors?.['required']">Email is required.</small>
       <small *ngIf="personForm.get('email')?.errors?.['email']">
         Email address invalid.
+      </small>
+      <small *ngIf="personForm.get('email')?.errors?.['serverError']">
+        {{ personForm.get('email')?.errors?.['serverError'] }}
       </small>
     </div>
 
@@ -48,11 +60,17 @@
     <select id="department" formControlName="department">
       <option *ngFor="let department of departmentList" [value]="department.id">{{ department.name }}</option>
     </select>
+    <div *ngIf="personForm.get('department')?.invalid">
+      <small *ngIf="personForm.get('department')?.errors?.['serverError']">
+        {{ personForm.get('department')?.errors?.['serverError'] }}
+      </small>
+    </div>
 
     <br/>
     <br/>
 
     <p>Fields marked with an asterisk (*) are required.</p>
+
     <button type="submit" [disabled]="personForm.invalid">Submit</button>
 
   </form>

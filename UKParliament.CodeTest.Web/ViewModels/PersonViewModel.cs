@@ -9,13 +9,13 @@ public class PersonViewModel
     [Required]
     public int Id { get; set; } 
     
-    [Required]
+    [Required(ErrorMessage = "First name is required.")]
     public string FirstName { get; set; }
     
-    [Required]
+    [Required(ErrorMessage = "Last name is required.")]
     public string LastName { get; set; }
     
-    [Required]
+    [Required(ErrorMessage = "Date of Birth is required.")]
     [PresentOrPastDate]
     public string DateOfBirth { get; set; }
     
@@ -26,7 +26,7 @@ public class PersonViewModel
     [ValidateNever]
     public string DepartmentName { get; set; }
     
-    [Required]
+    [Required(ErrorMessage = "Email is required.")]
     [Email]
     public string EmailAddress { get; set; }
 }

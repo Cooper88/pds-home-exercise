@@ -15,8 +15,13 @@ public class EmailAttribute : ValidationAttribute
         ErrorMessage = "Invalid email address.";
     }
 
-    public override bool IsValid(object value)
+    public override bool IsValid(object? value)
     {
+        if (value == null)
+        {
+            return true; // Required attribute takes care of this check.
+        }
+        
         var email = value.ToString();
         return _emailRegex.IsMatch(email);
     }
