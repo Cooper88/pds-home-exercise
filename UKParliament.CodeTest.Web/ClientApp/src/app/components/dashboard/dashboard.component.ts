@@ -3,7 +3,7 @@ import {PersonViewModel} from "../../models/person-view-model";
 import {ListComponent} from "../list/list.component";
 
 @Component({
-  selector: 'app-home',
+  selector: 'dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
@@ -14,8 +14,9 @@ export class DashboardComponent {
 
   @ViewChild(ListComponent) listComponent!: ListComponent;
 
-  refreshPersonList() {
-    this.listComponent?.getAll();
+  onSubmitClicked() {
+    this.listComponent?.getAll(); // Refresh list of people
+    this.addNewPerson();          // Returns editor form to default 'add new person'
   }
   onPersonSelected(personId: number) {
     this.selectedPersonId = personId;

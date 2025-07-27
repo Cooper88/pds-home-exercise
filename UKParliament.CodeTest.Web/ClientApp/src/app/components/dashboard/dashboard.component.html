@@ -15,7 +15,7 @@
       <person-list (personIdEmitted)="onPersonSelected($event)"></person-list>
     </div>
     <div id="right-panel">
-      <person-editor (submitButtonClicked)="refreshPersonList()" [personId]="selectedPersonId"></person-editor>
+      <person-editor (submitButtonClicked)="onSubmitClicked()" [personId]="selectedPersonId"></person-editor>
     </div>
   </div>
 </main>

@@ -16,12 +16,19 @@ export class EditorComponent implements OnChanges, OnInit {
   @Input() personId: number = 0;
 
   personForm: FormGroup = this.fb.group({
-    firstname: ['', Validators.required],
-    lastname: ['', Validators.required],
-    department: ['', Validators.required],
+    firstname: ['',
+      Validators.required
+    ],
+    lastname: ['',
+      Validators.required
+    ],
+    department: ['',
+      Validators.required
+    ],
     dateOfBirth: ['', [
       Validators.required,
-      presentOrPastDateValidator]
+      presentOrPastDateValidator
+    ]
     ],
     email: ['', [
       Validators.required,
@@ -41,10 +48,12 @@ export class EditorComponent implements OnChanges, OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['personId']) {
-      this.resetPersonEditor();
-      const personId: number = changes['personId'].currentValue;
-      if (personId > 0) {
-        this.getPersonById(personId);
+      this.resetPersonEditorForm();
+      const id: number = changes['personId'].currentValue;
+      if (id > 0) {
+        this.getPersonById(id);
+      } else {
+        this.selectedPersonId = 0;
       }
     }
   }
@@ -91,7 +100,10 @@ export class EditorComponent implements OnChanges, OnInit {
     if (this.selectedPersonId > 0) {
 
       this.personService.update(payload).subscribe({
-        next: () => this.resetPersonEditor(),
+        next: () => {
+          this.resetPersonEditorForm();
+          this.submitButtonClicked.emit();
+        },
         error: result => {
           this.processServerErrors(result);
         }
@@ -100,7 +112,10 @@ export class EditorComponent implements OnChanges, OnInit {
     } else {
 
       this.personService.add(payload).subscribe({
-        next: () => this.resetPersonEditor(),
+        next: () => {
+          this.resetPersonEditorForm();
+          this.submitButtonClicked.emit();
+        },
         error: result => {
           this.processServerErrors(result);
         }
@@ -110,12 +125,9 @@ export class EditorComponent implements OnChanges, OnInit {
 
   }
 
-  resetPersonEditor() {
+  resetPersonEditorForm() {
     this.personForm.reset();
-    this.selectedPersonId = 0;
-    this.personForm.controls['department'].setValue(this.departmentList[0].id);
-
-    this.submitButtonClicked.emit();
+    this.personForm.controls['department'].setValue(this.departmentList[0]?.id);
   }
 
   processServerErrors(data: any) {

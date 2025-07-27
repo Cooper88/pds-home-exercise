@@ -1,6 +1,6 @@
 <div id="editor-container">
-  <h2 *ngIf="personId == 0">Add New Person</h2>
-  <h2 *ngIf="personId > 0">Edit Person</h2>
+  <h2 *ngIf="selectedPersonId === 0">Add New Person</h2>
+  <h2 *ngIf="selectedPersonId > 0">Edit Person</h2>
 
   <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
 
