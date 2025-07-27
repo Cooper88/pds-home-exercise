@@ -17,10 +17,16 @@ export class EditorComponent implements OnChanges, OnInit {
 
   personForm: FormGroup = this.fb.group({
     firstname: ['',
-      Validators.required
+      [
+        Validators.required,
+        Validators.maxLength(20)
+      ]
     ],
     lastname: ['',
-      Validators.required
+      [
+        Validators.required,
+        Validators.maxLength(20)
+      ]
     ],
     department: ['',
       Validators.required
@@ -32,7 +38,9 @@ export class EditorComponent implements OnChanges, OnInit {
     ],
     email: ['', [
       Validators.required,
-      Validators.email]
+      Validators.maxLength(30),
+      Validators.email
+    ]
     ],
   });
 
