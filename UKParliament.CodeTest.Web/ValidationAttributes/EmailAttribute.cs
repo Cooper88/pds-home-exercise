@@ -3,6 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace UKParliament.CodeTest.Web.ValidationAttributes;
 
+/// <summary>
+/// To be used to check if the the value is a valid email address.
+/// </summary>
 public class EmailAttribute : ValidationAttribute
 {
     private static readonly Regex _emailRegex = new Regex(

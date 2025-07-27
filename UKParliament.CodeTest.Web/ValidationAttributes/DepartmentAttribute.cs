@@ -3,6 +3,9 @@ using UKParliament.CodeTest.Services;
 
 namespace UKParliament.CodeTest.Web.ValidationAttributes;
 
+/// <summary>
+/// To be used to check whether the departmentId passed in is a valid department. 
+/// </summary>
 public class DepartmentAttribute : ValidationAttribute
 {
     public DepartmentAttribute()

@@ -3,6 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace UKParliament.CodeTest.Web.ValidationAttributes;
 
+/// <summary>
+/// To be used to check if the value passed in is a valid UK date either for today or in the past. 
+/// </summary>
 public class PresentOrPastDateAttribute : ValidationAttribute
 {
     private static readonly Regex _dateRegex = new Regex(

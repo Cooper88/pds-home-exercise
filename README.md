@@ -1,19 +1,25 @@
-# UK Parliament - Product Team Home Exercise for Senior Developer
+# UK Parliament - Person Manager
 
-## Dependencies
-Please ensure you have the following installed:
-* .NET 8 SDK (you may need to ensure your Visual Studio installation is fully up to date)
-* Node v20.16.0 LTS
+## Implementation Notes
 
-## Introduction
+### Frontend Validation 
 
-Thanks for doing our recruitment home exercise. We have written a template solution for you, to save you from having to do too much setup.
+Frontend validation has been implemented. 
 
-* Clone this repository, and open the solution
-* Set **UKParliament.CodeTest.Web** as the startup project
-* Build and run it (NPM should install all the dependencies automatically)
-* Instructions have been provided for you within the solution and these will display on the home page. The home page also shows the assessment criteria for the test. **You should aim to satisfy all points on it.**
+### Backend Validation
 
-## Submitting your test
-* After you have complete this test please host your solution on GitHub (or another git based hosting platform)
-* Provide us with a link so we can clone your solution
+Validation of form submission payload has been implemented by using ValidationAttributes. The custom validation attributes can be found under UKParliament.CodeTest.Web/ValidationAttributes.
+
+One possible alternative approach to using ValidationAttributes is using [FluentValidation](https://docs.fluentvalidation.net/en/latest/aspnet.html) both 
+approaches achieve keeping validation logic out of the services and in turn keeping the controllers as lightweight as possible. 
+
+
+## Unit Testing
+
+The UKParliament.CodeTests.Tests project contains unit tests for the following:
+
+- Controllers
+- Mapping
+- Repositories 
+- Services
+- ValidationAttributes 

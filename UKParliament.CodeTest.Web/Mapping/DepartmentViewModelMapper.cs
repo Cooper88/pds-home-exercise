@@ -14,7 +14,7 @@ public static class DepartmentViewModelMapper
         };
     }
     
-    public static List<DepartmentViewModel> MapToDepartmentViewModel(IEnumerable<Department> departmentList)
+    public static List<DepartmentViewModel> MapToDepartmentViewModel(List<Department> departmentList)
     {
         List<DepartmentViewModel> list = [];
         list.AddRange(departmentList.Select(person => MapToDepartmentViewModel(person)));
