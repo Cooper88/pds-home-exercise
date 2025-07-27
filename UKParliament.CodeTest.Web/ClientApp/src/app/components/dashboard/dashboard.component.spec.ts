@@ -1,5 +1,5 @@
-describe('HomeComponent', () => {
-  it('This is an example test for the HomeComponent', () => {
+describe('DashboardComponent', () => {
+  it('This is an example test for the DashboardComponent', () => {
     expect(true).toBeTruthy();
   })
 });
