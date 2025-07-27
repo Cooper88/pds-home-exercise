@@ -140,25 +140,18 @@ export class EditorComponent implements OnChanges, OnInit {
 
   processServerErrors(data: any) {
 
-    if (data.error.errors?.FirstName?.length > 0) {
-      this.personForm.get('firstname')?.setErrors({serverError: data.error.errors?.FirstName[0]});
-    }
+    const serverErrors = new Map<string, string>();
+    serverErrors.set('FirstName', 'firstname');
+    serverErrors.set('LastName', 'lastname');
+    serverErrors.set('DepartmentId', 'department');
+    serverErrors.set('DateOfBirth', 'dateOfBirth');
+    serverErrors.set('EmailAddress', 'email');
 
-    if (data.error.errors?.LastName?.length > 0) {
-      this.personForm.get('lastname')?.setErrors({serverError: data.error.errors?.LastName[0]});
-    }
-
-    if (data.error.errors?.DateOfBirth?.length > 0) {
-      this.personForm.get('dateOfBirth')?.setErrors({serverError: data.error.errors?.DateOfBirth[0]});
-    }
-
-    if (data.error.errors?.EmailAddress?.length > 0) {
-      this.personForm.get('email')?.setErrors({serverError: data.error.errors?.EmailAddress[0]});
-    }
-
-    if (data.error.errors?.DepartmentId?.length > 0) {
-      this.personForm.get('department')?.setErrors({serverError: data.error.errors?.DepartmentId[0]});
-    }
+    serverErrors.forEach((value, key) => {
+      if (data.error.errors?.[`${key}`]?.length > 0) {
+        this.personForm.get(`${value}`)?.setErrors({serverError: data.error.errors?.[`${key}`][0]});
+      }
+    });
 
   }
 
