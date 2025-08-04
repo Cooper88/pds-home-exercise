@@ -3,6 +3,7 @@ using UKParliament.CodeTest.Data;
 using UKParliament.CodeTest.Data.Repositories.Department;
 using UKParliament.CodeTest.Data.Repositories.Person;
 using UKParliament.CodeTest.Services;
+using UKParliament.CodeTest.Web.Middleware;
 
 namespace UKParliament.CodeTest.Web;
 
@@ -40,6 +41,9 @@ public class Program
             app.UseHsts();
         }
 
+        // Global Error Handling
+        app.UseMiddleware<ExceptionMiddleware>();
+        
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
